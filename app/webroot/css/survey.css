@@ -1,0 +1,203 @@
+﻿/* Set the css characteristics for CakePhp Warning messages */
+.message{
+	color:red;
+	font-size:x-large;
+	text-decoration:none;
+	margin:10px;
+	border:red thick solid;
+	padding:10px;
+	box-shadow:black 10px 10px;
+	width:300px;
+	
+}
+/* Confusion on what id set the message.  Further testing to determine if the above
+	class is necessary/redundant*/
+.message #flashMessage{
+	color:red;
+	font-size:x-large;
+	text-decoration:none;
+	border:red thick solid;
+	padding:10px;
+	margin:10px;
+	box-shadow:10px 10px;
+}
+
+/*  Chrome/IE had different default positions for textboxes. This class 
+	allowed Chrome/IE to have different css positions than firefox */
+.chrome_ie{
+	position:relative;
+	left:-100px;
+}
+
+@-moz-document url-prefix(){
+
+	.chrome_ie{
+	}
+
+}
+
+/* Index.html Admin-View ----*/
+
+
+.infoTitle{
+	
+	height:50px;
+	padding:15px;
+	background-color:#663300;
+	color:#F9F9F9;
+	box-shadow:2px 2px;
+}
+
+.infoDescr{
+	margin-left:20px;
+}
+
+.infoDescr p{
+	font-size:14px;
+	font-weight:bold;
+}
+
+
+
+/* ----- Survey.html Page -----*/
+
+/* panel */
+.panel, .panelcollapsed 
+{
+	background: #eee;
+	margin: 5px;
+	padding: 0px 0px 5px;
+	width: 98%;
+	border: 1px solid #999;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+}
+
+/* panel heading */
+.panel h2, .panelcollapsed h2 
+{
+	font-size: 18px;
+	font-weight: normal;
+	margin: 0px;
+	padding: 4px;
+	background: #CCC url(arrow-up.gif) no-repeat 98%;
+	border-bottom: 1px solid #999;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-top: 1px solid #FFF;
+	border-right: 1px solid #FFF;
+	border-left: 1px solid #FFF;
+}
+
+/* panel heading on rollover */
+.panel h2:hover, .panelcollapsed h2:hover { background-color: #A9BCEF; }
+
+/* heading of a collapsed panel */
+.panelcollapsed h2 
+{
+	background: #CCC url(arrow-dn.gif) no-repeat 98%;
+	border-color: #CCC;
+}
+
+/* panel content - do not set borders or paddings */
+.panelcontent 
+{ 
+	background: #EEE; 
+	overflow: hidden;
+}
+
+/* collapsed panel content */
+.panelcollapsed .panelcontent { display: none; }
+
+
+.column{
+	width:40%;
+	margin:10px 3%;
+}
+
+.check{
+	width:100%;
+	overflow:auto;
+}
+
+.column input{
+	float:left;
+}
+
+.column p{
+	float:left;
+	margin-left:5px;
+	margin-bottom:10px;
+	margin-top:-2px;
+}
+
+.buttonHolder{
+	float:left;
+	width:150px;
+	overflow:auto;
+}
+
+.leftButton{
+	float:left;
+}
+
+.rightButton{
+	float:right;
+}
+
+/* ----- Sections.html Page ----*/
+/* The sections page is contained in one div .sections.  This allows
+	for editing of specific elements on this page and easily override the
+	Church's css settings*/
+.sections{
+	
+	
+}
+
+.sections textarea{
+	width:300px;
+	height:40px;
+	margin:5px;
+	resize:none;
+	
+}
+
+/*The Cakephp Form created a .textarea class for holding the generated textareas.
+   The below CSS edits the size of the textbox's auto-generated container */
+.sections .textarea{
+	max-height:50px;
+}
+
+.sections .textarea label{
+	position:relative;
+	bottom:30px;
+}
+
+/* The following modifies the labels for firefox which
+	loaded the labels in a different position than Chrome/IE */
+@-moz-document url-prefix(){
+	.sections .textarea label{
+	position:relative;
+	bottom:0px;
+}
+
+	
+}
+
+.sections .input .checkbox{
+	float:left;
+	margin:5px;
+	position
+}
+/* Controls width choice column's textbox */
+#textWidth{
+	width:95%;
+	margin:auto;
+}
+
+
+.tableHeader{
+	background-color:#663300;
+	color:white;
+	font-weight:bold;
+}
