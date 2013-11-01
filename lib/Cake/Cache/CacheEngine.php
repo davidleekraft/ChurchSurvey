@@ -14,6 +14,14 @@
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
+ /**
+ * 
+ * Edit by @manning: force the timezone setting instead of using the system time.
+ * 
+ */
+ 
+ include 'set_timezone.php';
+ 
 /**
  * Storage engine for CakePHP caching
  *
