@@ -25,6 +25,12 @@ class AdminController extends AppController
 	
 	}
 	
+	//Report section page, main console for generating reports
+	public function reports()
+		{
+			//Insert code for report controller
+		}
+	
 	//Admin section page, simply loads Section information from database for use in view
     public function sections()
 		{  		
