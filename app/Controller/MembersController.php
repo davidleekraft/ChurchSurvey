@@ -2,8 +2,12 @@
 class MembersController extends AppController {
 	public function beforeFilter() {
 		parent::beforeFilter();
+		
+		
 	}
-
+	
+	public $helpers = array('Html', 'Form');
+	
 	public function index() {
 		if(!$this->Session->check('Member.MemberID'))
 		{
@@ -21,6 +25,16 @@ class MembersController extends AppController {
 
 	public function survey() {
 		$this->set('memberID', $this->Session->read('Member.MemberID'));
+		
+		$this->loadmodel('Section');
+		
+		$conditions = array('recursive' => 1);
+		$this->set('sections', $this->Section->find('all', $conditions));
+		
+		$this->loadmodel('Choice');
+		
+		$conditions = array('recursive' => 1);
+		$this->set('choices', $this->Choice->find('all', $conditions));
 	}
 	
 	/**
