@@ -35,6 +35,11 @@ class MembersController extends AppController {
 		
 		$conditions = array('recursive' => 1);
 		$this->set('choices', $this->Choice->find('all', $conditions));
+		
+		$this->loadmodel('Member');
+		
+		$conditions = array('memberID' => $this->Session->read('Member.MemberID'));
+		$this->set('members', $this->Member->find('all', $conditions));
 	}
 	
 	/**
