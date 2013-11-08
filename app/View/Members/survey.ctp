@@ -3,17 +3,17 @@
  * TODO: Implement survey
  */
  
-if(!isset($session))
-{
-	header("Location: ./select");
-	die();
-}
-
 foreach($members as $memberKey => $member)
 {
+
 	if($member['Member']['MemberID'] == $this->Session->read('Member.MemberID'))
 	{
 		$memberName = $member['Member']['FName'];
+	}
+	if(!isset($memberName))
+	{
+		header("Location: ./select");
+		die();
 	}
 }
  
