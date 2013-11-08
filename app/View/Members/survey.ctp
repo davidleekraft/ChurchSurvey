@@ -3,6 +3,12 @@
  * TODO: Implement survey
  */
  
+if(!isset($session))
+{
+	header("Location: ./select");
+	die();
+}
+
 foreach($members as $memberKey => $member)
 {
 	if($member['Member']['MemberID'] == $this->Session->read('Member.MemberID'))
@@ -10,6 +16,8 @@ foreach($members as $memberKey => $member)
 		$memberName = $member['Member']['FName'];
 	}
 }
+ 
+
  
 ?>
 <h2> Welcome, <?php echo $memberName; ?>! </h2>
