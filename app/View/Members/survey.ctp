@@ -10,13 +10,13 @@ foreach($members as $memberKey => $member)
 	{
 		$memberName = $member['Member']['FName'];
 	}
-	if(!isset($memberName))
+	
+}
+ if(!isset($memberName))
 	{
 		header("Location: ./select");
 		die();
 	}
-}
- 
 
  
 ?>
@@ -44,9 +44,11 @@ foreach($members as $memberKey => $member)
 			
 			if($sectionIdent == $choiceIdent)
 			{
+				
 				echo "<input type='checkbox' name='".$sectionIdent."' value='".$choice['Choice']['Text']."' />";
 				echo " ".$choice['Choice']['Text'];
-			
+				
+				
 				echo "<br />";
 			}
 			
@@ -59,7 +61,6 @@ foreach($members as $memberKey => $member)
 		echo "<br /><br />";
 	
 	}
-	
 ?>
 
 <input type="submit" value="Submit" />

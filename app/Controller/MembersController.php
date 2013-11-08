@@ -40,6 +40,11 @@ class MembersController extends AppController {
 		
 		$conditions = array('memberID' => $this->Session->read('Member.MemberID'));
 		$this->set('members', $this->Member->find('all', $conditions));
+		
+		$this->loadmodel('SurveyAnswer');
+		
+		$conditions = array('memberID' => $this->Session->read('Member.MemberID'));
+		$this->set('answers', $this->SurveyAnswer->find('all', $conditions));
 	}
 	
 	/**
