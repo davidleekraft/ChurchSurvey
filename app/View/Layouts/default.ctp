@@ -42,6 +42,22 @@ echo $this->Html->script('utils');
 
 <style type="text/css">
 #sidebar .widget_categories a { color: brown; }
+
+@media print {
+    #printArea {
+        background-color: white;
+        height: 100%;
+        width: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        margin: 0;
+        padding: 15px;
+        font-size: 14px;
+        line-height: 18px;
+    }
+}
+
 </style>
 
 <script type="text/javascript">

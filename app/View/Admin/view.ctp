@@ -9,6 +9,9 @@
 <li class="page_item page-item-#">
 	<?php echo $this->Html->link('Reports', 'reports')?>
 </li>
+<li class="page_item page-item-#">
+	<?php echo $this->Html->link('Printable Survey', 'printable')?>
+</li>
 <?php echo $this->end('menu');		?>	
 
 <?php echo $this->fetch('content'); ?>

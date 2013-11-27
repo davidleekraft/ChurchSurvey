@@ -25,6 +25,26 @@ class AdminController extends AppController
 	
 	}
 	
+	//Generates Printable Survey
+	public function printable()
+	{
+ 
+		
+		$this->loadmodel('Section');
+		$conditions = array('recursive' => 1);
+		$this->set('sections', $this->Section->find('all', $conditions));
+		$this->loadmodel('Choice');
+		$conditions = array('recursive' => 1);
+		$this->set('choices', $this->Choice->find('all', $conditions));
+		
+		$layout = $this->layout; 
+		$this->layout = null; 
+		$this->render("printable"); 
+		$this->layout = $layout;
+		
+		
+	}
+	
 	//Report section page, main console for generating reports
 	public function reports()
 		{
