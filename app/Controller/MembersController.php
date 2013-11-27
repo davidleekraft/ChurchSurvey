@@ -22,29 +22,57 @@ class MembersController extends AppController {
 	public function add() {
 
 	}
+	
+	public function thanks() {
+	}
 
 	public function survey() {
+		
 		$this->set('memberID', $this->Session->read('Member.MemberID'));
-		
+		$this->loadmodel('SurveyAnswer');
 		$this->loadmodel('Section');
-		
+		$mID = $this->Session->read('Member.MemberID');
 		$conditions = array('recursive' => 1);
 		$this->set('sections', $this->Section->find('all', $conditions));
+		$sectionIDs[] = $this->set('sections', $this->Section->find('all', $conditions));
 		
-		$this->loadmodel('Choice');
+		if($this->request->is('post'))
+		{
+				$deleteQuery = $this->SurveyAnswer->query("DELETE FROM SurveyAnswers
+				WHERE MemberID='$mID'");
+				
+				foreach($_POST['survey'] as $answers)
+				{
+					if(ISSET($answers))
+					{
+						$insertQuery = $this->SurveyAnswer->query("INSERT INTO SurveyAnswers(ChoiceID, MemberID)
+							VALUES ('$answers', '$mID')");
+					}
+				}
+			
+			$this->redirect(array('action' => 'thanks'));
 		
-		$conditions = array('recursive' => 1);
-		$this->set('choices', $this->Choice->find('all', $conditions));
+		}
+		else
+		{
+			
+			$this->loadmodel('Choice');
 		
-		$this->loadmodel('Member');
+			$conditions = array('recursive' => 1);
+			$this->set('choices', $this->Choice->find('all', $conditions));
 		
-		$conditions = array('memberID' => $this->Session->read('Member.MemberID'));
-		$this->set('members', $this->Member->find('all', $conditions));
+			$this->loadmodel('Member');
 		
-		$this->loadmodel('SurveyAnswer');
+			$conditions = array('memberID' => $this->Session->read('Member.MemberID'));
+			$this->set('members', $this->Member->find('all', $conditions));
 		
-		$conditions = array('memberID' => $this->Session->read('Member.MemberID'));
-		$this->set('answers', $this->SurveyAnswer->find('all', $conditions));
+			
+		
+			$conditions = array('memberID' => $this->Session->read('Member.MemberID'));
+			$this->set('answers', $this->SurveyAnswer->find('all', $conditions));
+			
+		}
+		
 	}
 	
 	/**

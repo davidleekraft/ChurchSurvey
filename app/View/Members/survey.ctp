@@ -24,7 +24,7 @@ foreach($members as $memberKey => $member)
 <h2> SURVEY </h2>
 <p> Select All That Apply </p>
 
-<form>
+<form method="POST">
 
 <?php
 
@@ -45,7 +45,7 @@ foreach($members as $memberKey => $member)
 			if($sectionIdent == $choiceIdent)
 			{
 				
-				echo "<input type='checkbox' name='".$sectionIdent."' value='".$choice['Choice']['Text']."' />";
+				echo "<input type='checkbox' name='survey[]' value='".$choice['Choice']['ChoiceID']."' />";
 				echo " ".$choice['Choice']['Text'];
 				
 				
