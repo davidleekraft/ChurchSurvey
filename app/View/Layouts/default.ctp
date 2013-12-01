@@ -96,8 +96,8 @@ echo $this->Html->script('utils');
 <div id="header">
 		<div id="header_inner">
 		<div class="chrome_ie">
-			<div class="logo">
-				<a rel="home" href="http://oslc2.cc/" class="site_title">Our Saviour Lutheran Church</a>
+			<div style="margin-left: -60px; padding-top: 5px;" class="logo">
+				<a  rel="home" href="http://oslc2.cc/" class="site_title">Our Saviour Lutheran Church</a>
 			</div><!-- .logo -->
 		</div><!-- Close chrome_ie -->
 		<div id="header_extras">
