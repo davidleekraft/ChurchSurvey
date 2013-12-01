@@ -8,8 +8,8 @@
  * @link http://book.cakephp.org/2.0/en/controllers.html
  */
  
-class AdminController extends AppController
-	{
+class AdminController extends AppController	{
+
 	//Helpers used throughout controller
     public $helpers = array('Html', 'Form');	
 	
@@ -201,3 +201,59 @@ class AdminController extends AppController
 			}
 		}	
 	}
+	
+	//Change passwords page, change password for any user
+	public function changePasswords()
+		{
+			$this->loadModel('User');
+			$conditions = array('recursive' => 1);
+			$this->set('users', $this->User->find('all', $conditions));
+			
+			if ($this->request->is('post') && isset($this->request->data['User']))
+			{
+				$userData = array();
+				$users = $this->request->data['User'];
+				$errors = array();
+				
+				foreach($users as $user)
+				{
+					$userID = $users['userType'];
+					$userPass = $user['newPassword'];
+					if(!$userPass.equals($user['verifyPassword']))
+					{
+						$errors[] = "Passwords do not match";
+					}
+					if ($userPass < 5)
+					{
+						$errors[] = "Password must be at least 5 characters long";
+					}
+				//if ($userPass)
+				
+				//if(!empty($status['StatusID']))
+					//{
+					//foreach($status['StatusID'] as $statusID)
+						//{
+						array_push($userData, array('userID' => $userID));
+						//}		
+					//}
+			
+				}
+				if (count($errors)==0)
+				{
+					$deleteUser = $this->User->deleteAll(array('1 = 1'), false);
+					$saveUser = 	$this->User->saveAll($userData);
+				}
+				
+				if($deleteUser && $saveUser)
+				{
+					$this->Session->setFlash('Sections have been updated');
+				}
+			}
+		}
+		
+	//Manage users page, change status of users
+	public function manageUsers()
+		{
+			//Insert code for manage users controller
+		}
+	
