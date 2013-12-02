@@ -41,12 +41,15 @@ class MembersController extends AppController {
 				$deleteQuery = $this->SurveyAnswer->query("DELETE FROM SurveyAnswers
 				WHERE MemberID='$mID'");
 				
-				foreach($_POST['survey'] as $answers)
-				{
-					if(ISSET($answers))
+				if(ISSET($_POST['survey']))
+				{	
+					foreach($_POST['survey'] as $answers)
 					{
-						$insertQuery = $this->SurveyAnswer->query("INSERT INTO SurveyAnswers(ChoiceID, MemberID)
-							VALUES ('$answers', '$mID')");
+						if(ISSET($answers))
+						{
+							$insertQuery = $this->SurveyAnswer->query("INSERT INTO SurveyAnswers(ChoiceID, MemberID)
+								VALUES ('$answers', '$mID')");
+						}
 					}
 				}
 			
