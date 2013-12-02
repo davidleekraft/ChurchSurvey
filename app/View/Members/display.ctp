@@ -5,8 +5,7 @@ Cell Phone: <?php echo $member['Member']['CellPhone']; ?> <br />
 Home Phone: <?php echo $member['Member']['HomePhone']; ?> <br />
 Work Phone: <?php echo $member['Member']['WorkPhone']; ?> <br />
 Email: <?php echo $member['Member']['Email']; ?> </h4>
-<?php
 
+<br /><br />
 
-
-?>
+<h3><a href="./survey">Take Survey!</a></h3>
