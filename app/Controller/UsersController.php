@@ -57,7 +57,10 @@ class UsersController extends AppController {
 	public function logout()
 	{
 		$this->Session->delete('User.UserType');
-		$this->Session->delete('Member.MemberID', $member[0]['Member']['MemberID']);
+		if ($this->Session->check('Member.MemberID') == true){
+			$this->Session->delete('Member.MemberID');
+		}
+		
 		$this->redirect(array('controller' => 'users', 'action' => 'login'));
 	}
 
