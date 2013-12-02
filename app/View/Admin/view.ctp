@@ -12,6 +12,9 @@
 <li class="page_item page-item-#">
 	<?php echo $this->Html->link('Printable Survey', 'printable')?>
 </li>
+<li class="page_item page-item-#">
+	<?php echo $this->Html->link('Purge Responses', 'purgeAll')?>
+</li>
 <?php echo $this->end('menu');		?>	
 
 <?php echo $this->fetch('content'); ?>
