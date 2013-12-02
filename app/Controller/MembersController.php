@@ -26,6 +26,34 @@ class MembersController extends AppController {
 	public function thanks() {
 	}
 	
+	//Confirm identity page
+	public function confirmIdentity($firstName, $lastName)
+	{
+		$this->loadModel('Member');
+		$conditions = array('recursive' => 1);
+		$member = $this->Member->find('all', array('recursive' => 1, 'conditions' => array('Member.LName' => $lastName, 'Member.FName' => $firstName)));
+		if($this->request->is('post')) 
+		{
+			$memberID = $this->request->data('Member.MemberID');
+			
+			if($this->request->data('Member.MemberID') != null)
+			{
+				$this->Session->write('Member.MemberID', $this->request->data('Member.MemberID'));
+				$this->redirect(array('controller'=>'members', 'action' => 'survey'));
+			}
+			else
+			{
+				$this->Session->setFlash($memberID);
+			}
+		}
+		/*if(count($member < 1))
+		{
+			$this->redirect(array('controller'=>'members', 'action' => 'add'));
+		}*/
+		$this->set('members', $member);
+		
+	}
+	
 	public function display() {
 	
 		$mID = $this->Session->read('Member.MemberID');
