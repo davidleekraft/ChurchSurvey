@@ -39,7 +39,7 @@ class MembersController extends AppController {
 			if($this->request->data('Member.MemberID') != null)
 			{
 				$this->Session->write('Member.MemberID', $this->request->data('Member.MemberID'));
-				$this->redirect(array('controller'=>'members', 'action' => 'display'));
+				$this->redirect(array('controller'=>'members', 'action' => 'survey'));
 			}
 			else
 			{
@@ -126,40 +126,14 @@ class MembersController extends AppController {
 			$lastName = $this->request->data('Member.LName');
 			$memberID = $this->request->data('Member.MemberID');
 			
-			// If the page was submitted with name information
-			// Attempt to find the proper ueser
+			// If the page was submitted with name information, redirect to confirmIdentity
 			if($lastName != null and $firstName != null)
 			{
-				$member = $this->Member->find('all', array('recursive' => 0, 'conditions' => array('Member.LName' => $lastName, 'Member.FName' => $firstName)));
-
-				if(count($member) == 1)
-				{
-					// A single member was found with that name.
-					// Sets the proper session variables
-					$this->Session->write('Member.MemberID', $member[0]['Member']['MemberID']);
-					$this->redirect(array('controller'=>'members', 'action' => 'display'));
-				}
-				elseif(count($member) > 1)
-				{
-					// More than one member was found with that name.
-					// Return a list for them to select against.
-					$this->set('members', $member);
-				}
-				else
-				{
-					// The name wasn't found.
-					// Display a message to that effect
-					//
-					// TODO: Create a add member page and link to it here.
-					$this->Session->setFlash(__('Unknown member.'));
-				}
+				$this->redirect(array('controller'=>'members', 'action'=>'confirmIdentity', $firstName, $lastName));
 			}
-			elseif($memberID != null)
+			else
 			{
-				// If we have a memberID, set the session
-				// and redirect them to the survey.
-				$this->Session->write('Member.MemberID', $memberID);
-				$this->redirect(array('controller'=>'members', 'action' => 'display'));
+				$this->Session->setFlash('Must enter first and last name');
 			}
 		}
 	}
