@@ -15,7 +15,7 @@ class MembersController extends AppController {
 		}
 		else
 		{
-			$this->redirect(array('controller' => 'members', 'action' => 'survey'));
+			$this->redirect(array('controller' => 'members', 'action' => 'display'));
 		}
 	}
 
@@ -24,6 +24,16 @@ class MembersController extends AppController {
 	}
 	
 	public function thanks() {
+	}
+	
+	public function display() {
+	
+		$mID = $this->Session->read('Member.MemberID');
+		$this->loadmodel('Member');
+		$this->set('member', $this->Member->find('first', array('conditions' =>
+			array('MemberID' => $mID))));
+		
+	
 	}
 
 	public function survey() {
@@ -99,7 +109,7 @@ class MembersController extends AppController {
 					// A single member was found with that name.
 					// Sets the proper session variables
 					$this->Session->write('Member.MemberID', $member[0]['Member']['MemberID']);
-					$this->redirect(array('controller'=>'members', 'action' => 'survey'));
+					$this->redirect(array('controller'=>'members', 'action' => 'display'));
 				}
 				elseif(count($member) > 1)
 				{
@@ -121,7 +131,7 @@ class MembersController extends AppController {
 				// If we have a memberID, set the session
 				// and redirect them to the survey.
 				$this->Session->write('Member.MemberID', $memberID);
-				$this->redirect(array('controller'=>'members', 'action' => 'survey'));
+				$this->redirect(array('controller'=>'members', 'action' => 'display'));
 			}
 		}
 	}
