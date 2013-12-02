@@ -26,12 +26,21 @@
 
 <!-- Added Survey CSS & Java file -->
 <link rel="stylesheet" href="survey.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" media="screen" />
+<link rel="stylesheet" href="/resources/demos/style.css" media="screen" />
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+  <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+
 <script type="text/javascript" src="utils.js"></script>
 <?php
 echo $this->Html->css('survey');
+echo $this->Html->css('jquery-ui');
+echo $this->Html->css('style');
 echo $this->fetch('meta');
 echo $this->fetch('css');
 echo $this->Html->script('utils');
+echo $this->Html->script('jquery-1.9.1');
+echo $this->Html->script('jquery-ui');
 ?>
 	
 <!--[if IE 6]> <link rel="stylesheet" type="text/css" href="http://oslc2.cc/wp-content/themes/infocus/styles/_ie/ie6.css"> <![endif]-->
@@ -57,6 +66,12 @@ echo $this->Html->script('utils');
         line-height: 18px;
     }
 }
+
+  #accordion-resizer {
+    padding: 10px;
+    width: 350px;
+    height: 220px;
+  }
 
 </style>
 
