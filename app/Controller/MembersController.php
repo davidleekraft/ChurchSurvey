@@ -39,7 +39,7 @@ class MembersController extends AppController {
 			if($this->request->data('Member.MemberID') != null)
 			{
 				$this->Session->write('Member.MemberID', $this->request->data('Member.MemberID'));
-				$this->redirect(array('controller'=>'members', 'action' => 'survey'));
+				$this->redirect(array('controller'=>'members', 'action' => 'display'));
 			}
 			else
 			{
