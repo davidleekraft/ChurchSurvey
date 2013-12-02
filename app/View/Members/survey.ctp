@@ -1,3 +1,6 @@
+
+
+
 <?php
 /*
  * TODO: Implement survey
@@ -20,23 +23,45 @@ foreach($members as $memberKey => $member)
 
  
 ?>
+
+
+  <script>
+  $(function() {
+    $( "#accordion" ).accordion({
+      heightStyle: "content",
+      collapsible: true
+    });
+  });
+  $(function() {
+    $( "#accordion-resizer" ).resizable({
+      minHeight: 140,
+      minWidth: 200,
+      resize: function() {
+        $( "#accordion" ).accordion( "refresh" );
+      }
+    });
+  });
+  </script>
+  
+
+
+
+
 <h2> Welcome, <?php echo $memberName; ?>! </h2>
-<h2> SURVEY </h2>
-<p> Select All That Apply </p>
+<h2> Time & Talent Survey </h2>
+<p> Under Each Category, Select All That Apply </p>
 
 <form method="POST">
-
+  <div id="accordion">
 <?php
 
 	foreach($sections as $sectionKey => $section)
 	{
 		
-		?><div class="panelcollapsed"><?php
-		echo "<h4>".$section['Section']['Tag']."</h4>";
+		echo "<h3>".$section['Section']['Tag']."</h3><div><p>";
 		
 		
 		$sectionIdent = $section['Section']['SectionID'];
-		
 		
 		foreach($choices as $choiceKey => $choice)
 		{
@@ -53,17 +78,13 @@ foreach($members as $memberKey => $member)
 			}
 			
 		}
-		?><div class="clearboth"></div></div><?php
-		
-		
-		
-		
-		echo "<br /><br />";
+		?></p></div><?php
 	
 	}
 ?>
-
-<input type="submit" value="Submit" />
+</div>
+<input type="submit" value="Submit"/>
 <input type="reset" value="Clear" />
 
 </form>
+
