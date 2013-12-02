@@ -23,8 +23,8 @@ foreach($members as $memberKey => $member)
  
 ?>
 <h2> Welcome, <?php echo $memberName; ?>! </h2>
-<h2> SURVEY </h2>
-<p> Click On Categories To Expand, Then Select All That Apply </p>
+<h2> Time & Talent Survey </h2>
+<p> Under Each Category, Select All That Apply </p>
 
 <form method="POST">
 
