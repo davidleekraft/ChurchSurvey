@@ -200,7 +200,7 @@ class AdminController extends AppController	{
 				}
 			}
 		}	
-	}
+	
 	
 	//Change passwords page, change password for any user
 	public function changePasswords()
@@ -256,4 +256,6 @@ class AdminController extends AppController	{
 		{
 			//Insert code for manage users controller
 		}
+		
+	}
 	

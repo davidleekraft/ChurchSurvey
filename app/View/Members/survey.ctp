@@ -1,3 +1,5 @@
+<div class="sections">
+
 <?php
 /*
  * TODO: Implement survey
@@ -22,7 +24,7 @@ foreach($members as $memberKey => $member)
 ?>
 <h2> Welcome, <?php echo $memberName; ?>! </h2>
 <h2> SURVEY </h2>
-<p> Select All That Apply </p>
+<p> Click On Categories To Expand, Then Select All That Apply </p>
 
 <form method="POST">
 
@@ -31,12 +33,11 @@ foreach($members as $memberKey => $member)
 	foreach($sections as $sectionKey => $section)
 	{
 		
-		?><div class="panelcollapsed"><?php
-		echo "<h4>".$section['Section']['Tag']."</h4>";
+		?><div class="panelcollapsed"><details><?php
+		echo "<summary style='font-size: 1.3em'>".$section['Section']['Tag']."</summary><p>";
 		
 		
 		$sectionIdent = $section['Section']['SectionID'];
-		
 		
 		foreach($choices as $choiceKey => $choice)
 		{
@@ -53,12 +54,12 @@ foreach($members as $memberKey => $member)
 			}
 			
 		}
-		?><div class="clearboth"></div></div><?php
+		?></p><div class="clearboth"></div></div><?php
 		
 		
 		
 		
-		echo "<br /><br />";
+		echo "<br />";
 	
 	}
 ?>
@@ -67,3 +68,5 @@ foreach($members as $memberKey => $member)
 <input type="reset" value="Clear" />
 
 </form>
+
+</div>
