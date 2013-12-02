@@ -31,7 +31,8 @@
  * ...and connect the rest of 'Pages' controller's URLs.
  */
 	//Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
-    Router::connect('/~skinnerj/SEII/*', array('controller' => 'Users', 'action' => 'login'));
+    Router::connect('/~skinnerj/seii/*', array('controller' => 'Users', 'action' => 'login'));
+    Router::connect('/~skinnerj/seii/report', array('controller' => 'Report', 'action' => 'index'));
 
 /**
  * Load all plugin routes. See the CakePlugin documentation on
