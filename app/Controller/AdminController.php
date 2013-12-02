@@ -45,6 +45,20 @@ class AdminController extends AppController	{
 		
 	}
 	
+	//Purge database of all survey responses
+	public function purgeAll()
+	{
+		if($this->request->is('post'))
+		{
+				$this->loadmodel('SurveyAnswer');
+				$deleteQuery = $this->SurveyAnswer->query("DELETE FROM SurveyAnswers");
+				echo "<script> if (window.confirm('All Survey Responses Purged!')) {
+        					window.location.href='.';}</script>";
+		
+		}
+		
+	}
+	
 	//Report section page, main console for generating reports
 	public function reports()
 		{
