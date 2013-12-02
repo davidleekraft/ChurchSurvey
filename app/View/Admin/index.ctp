@@ -24,4 +24,9 @@
 			take the survey</li>
 	</ul>
 </div>
+<div>
+    <h2>Change Passwords</h2>
+    <?php echo $this->Html->link("Change Passwords", array('controller'=>'admin', 'action' => 'changepasswords')); ?>
+</div>
+
 	

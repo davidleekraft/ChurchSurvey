@@ -22,20 +22,6 @@ class AdminController extends AppController	{
 	//Index page exists, but no logic is yet necessary
 	public function index()
 	{
-        if("ADMIN" != $this->Session->read('User.UserType'))
-		{
-			$this->redirect(array('controller' => 'users', 'action' => 'login'));
-		}
-	
-	}
-    
-    public function display() {
-	
-		$mID = $this->Session->read('Member.MemberID');
-		$this->loadmodel('Member');
-		$this->set('member', $this->Member->find('first', array('conditions' =>
-			array('MemberID' => $mID))));
-		
 	
 	}
 	
