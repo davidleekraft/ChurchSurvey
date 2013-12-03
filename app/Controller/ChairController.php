@@ -52,4 +52,3 @@ class ChairController extends AppController	{
 		
 	}
 }
->>>>>>> 00646c91a0afed17594cf609d50ffa31bbc8cf89

@@ -96,16 +96,15 @@ class MembersController extends AppController {
 				$this->Session->write('Member.MemberID', $this->request->data('Member.MemberID'));
 				$this->redirect(array('controller'=>'members', 'action' => 'survey'));
 			}
-			else
-			{
-				$this->Session->setFlash($memberID);
-			}
+
 		}
-		if(count($member < 1))
+		$this->set('members', $member);
+		
+		if(count($member) < 1)
 		{
 			$this->redirect(array('controller'=>'members', 'action' => 'add'));
 		}
-		$this->set('members', $member);
+		
 		
 	}
 	
