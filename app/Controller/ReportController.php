@@ -13,7 +13,7 @@ class ReportController extends AppController
 	//Index page exists, but no logic is yet necessary
 	public function index()
 	{
-	
+		$this->redirect(array('action' => 'skillsReport'));
 	}
 	//This function loads information of all users for use in view to report by user name
 	public function findMember()
@@ -89,17 +89,17 @@ class ReportController extends AppController
 				}
 				
 				//Create a user readable list of skills chosed by user
-				$sklills_text = "<h2>Members with skills: ";
+				$sklills_text = "<h4>Members with skills: ";
 				for ($i = 0;$i < count($skills);$i++)
 				{
 					$sklills_text .= $skills[$i]['Choice']['Text'];
 					if($i != (count($skills) - 1))
 						$sklills_text .= ", ";
 				}
-				$sklills_text .= "</h2>";
+				$sklills_text .= "</h4>";
 				if($updated)
 				{
-					$sklills_text .=  "<h2>Surveys since: " . $show_date . "</h2>";
+					$sklills_text .=  "<h4>Surveys since: " . $show_date . "</h4>";
 					$members = $this->Member->find('all', array('conditions' => array('Member.MemberID' => $membersWithSkills, 
 																					  'Member.StatusID' => $constituents,
 																					  'Member.SurveyUpdated >=' => $updated), 
