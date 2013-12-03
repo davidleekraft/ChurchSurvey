@@ -42,7 +42,10 @@ class AdminController extends AppController	{
 	//Generates Printable Survey
 	public function printable()
 	{
- 
+         if("ADMIN" != $this->Session->read('User.UserType'))
+		{
+			$this->redirect(array('controller' => 'users', 'action' => 'login'));
+		}
 		
 		$this->loadmodel('Section');
 		$conditions = array('recursive' => 1);
@@ -62,6 +65,10 @@ class AdminController extends AppController	{
 	//Purge database of all survey responses
 	public function purgeAll()
 	{
+        if("ADMIN" != $this->Session->read('User.UserType'))
+		{
+			$this->redirect(array('controller' => 'users', 'action' => 'login'));
+		}
 		if($this->request->is('post'))
 		{
 				$this->loadmodel('SurveyAnswer');
@@ -81,7 +88,11 @@ class AdminController extends AppController	{
 	
 	//Admin section page, simply loads Section information from database for use in view
     public function sections()
-		{  		
+		{  
+		if("ADMIN" != $this->Session->read('User.UserType'))
+		{
+			$this->redirect(array('controller' => 'users', 'action' => 'login'));
+		}		
 		$this->loadModel('Section');
 		$this->loadModel('Status');		
 		
@@ -95,7 +106,10 @@ class AdminController extends AppController	{
 	//Whenever a section is editted from admin/sections, it redirects to admin/editSections to processes and store the new information
 	public function editSections()
 		{
-				
+		if("ADMIN" != $this->Session->read('User.UserType'))
+		{
+			$this->redirect(array('controller' => 'users', 'action' => 'login'));
+		}	
 		
 		if ($this->request->is('post') && isset($this->request->data['Section']))
 			{
@@ -141,6 +155,10 @@ class AdminController extends AppController	{
 	//Action for adding new sections
 	public function addSections()
 		{
+		if("ADMIN" != $this->Session->read('User.UserType'))
+		{
+			$this->redirect(array('controller' => 'users', 'action' => 'login'));
+		}
 		if ($this->request->is('post') && isset($this->request->data))
 			{
 			$this->loadModel('Section');
@@ -158,6 +176,10 @@ class AdminController extends AppController	{
 	//Which coices are displayed depend upon which Section they belong to
 	public function choices($sectionID)
 		{
+		if("ADMIN" != $this->Session->read('User.UserType'))
+		{
+			$this->redirect(array('controller' => 'users', 'action' => 'login'));
+		}
 		$this->set('sectionID', $sectionID);		
 		$this->loadModel('Choice');		
 		$choices = $this->Choice->find('all', array('conditions' => array('Choice.SectionID' => $sectionID)));
@@ -173,7 +195,10 @@ class AdminController extends AppController	{
 	//Choices of a certain Section are editted, so a SectionID is required
 	public function editChoices($sectionID)
 		{		
-		
+		if("ADMIN" != $this->Session->read('User.UserType'))
+		{
+			$this->redirect(array('controller' => 'users', 'action' => 'login'));
+		}
 		if ($this->request->is('post') && isset($this->request->data['Choice']))
 			{
 			$this->loadModel('Choice');
@@ -216,6 +241,10 @@ class AdminController extends AppController	{
 	//Action for adding new choices to a specific section
 	public function addChoices($sectionID)
 		{
+		if("ADMIN" != $this->Session->read('User.UserType'))
+		{
+			$this->redirect(array('controller' => 'users', 'action' => 'login'));
+		}
 		if ($this->request->is('post') && isset($this->request->data))
 			{
 			$this->loadModel('Choice');
@@ -233,6 +262,10 @@ class AdminController extends AppController	{
 	//Change passwords page, change password for any user
 	public function changePasswords()
 		{
+		if("ADMIN" != $this->Session->read('User.UserType'))
+		{
+			$this->redirect(array('controller' => 'users', 'action' => 'login'));
+		}
 			$this->loadModel('User');
 			$conditions = array('recursive' => 1);
 			$this->set('users', $this->User->find('all', $conditions));
