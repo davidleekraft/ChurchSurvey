@@ -30,6 +30,43 @@ class MembersController extends AppController {
 		{
 			$this->redirect(array('controller' => 'users', 'action' => 'login'));
 		}
+		
+		$this->loadmodel('Member');
+		
+		if($this->request->is('post'))
+		{	
+					$dateTime = date("Y-m-d H:i:s");
+					
+					$FName = $this->data['MemberAdd']['FName'];
+					$LName = $this->data['MemberAdd']['LName'];
+					$ParentFName = $this->data['MemberAdd']['ParentFName'];
+					$ParentLName = $this->data['MemberAdd']['ParentLName'];
+					$Address = $this->data['MemberAdd']['Address'];
+					$CellPhone = $this->data['MemberAdd']['CellPhone'];
+					$HomePhone = $this->data['MemberAdd']['HomePhone'];
+					$WorkPhone = $this->data['MemberAdd']['WorkPhone'];
+					$Text = $this->data['MemberAdd']['TextMessage'];
+					$Email = $this->data['MemberAdd']['Email'];
+					$Gender = $this->data['MemberAdd']['Gender'];
+					$StatusID = $this->data['MemberAdd']['Status'];
+					
+					$insertQuery = $this->Member->query("INSERT INTO Members(FName, LName, 
+							ParentFName, ParentLName, Address, CellPhone, HomePhone, WorkPhone,
+							Text, Email, Gender, StatusID, SurveyUpdated)
+								VALUES ('$FName', '$LName',
+								'$ParentFName', '$ParentLName',
+								'$Address', '$CellPhone',
+								'$HomePhone', '$WorkPhone',
+								'$Text', '$Email',
+								'$Gender', '$StatusID',
+								'$dateTime') ");
+					
+				
+			
+			
+			$this->redirect(array('controller' => 'members', 'action' => 'select'));	
+		}
+		
 	}
 	
 	public function thanks() {
@@ -64,10 +101,10 @@ class MembersController extends AppController {
 				$this->Session->setFlash($memberID);
 			}
 		}
-		/*if(count($member < 1))
+		if(count($member < 1))
 		{
 			$this->redirect(array('controller'=>'members', 'action' => 'add'));
-		}*/
+		}
 		$this->set('members', $member);
 		
 	}
