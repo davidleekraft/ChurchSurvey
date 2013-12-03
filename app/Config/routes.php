@@ -31,7 +31,7 @@
  * ...and connect the rest of 'Pages' controller's URLs.
  */
 	//Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
-    Router::connect('/~skinnerj/seii/', array('controller' => 'Home', 'action' => 'index'));
+    Router::connect('/~westrk/seii/', array('controller' => 'Home', 'action' => 'index'));
 	//Router::connect('/~skinnerj/seii/users', array('controller' => 'Users', 'action' => 'login'));
     //Router::connect('/~skinnerj/seii/report', array('controller' => 'Report', 'action' => 'index'));
 

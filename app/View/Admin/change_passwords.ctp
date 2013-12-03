@@ -14,7 +14,7 @@
 $this->extend('/Admin/view');
 
 //Initialize form to change password
-echo $this->Form->create('User', array('url' => array('controller' => 'admin', 'action' => 'changePasswords')));
+echo $this->Form->create('ChangePassword', array('url' => array('controller' => 'admin', 'action' => 'changePasswords')));
 ?>
 
 <table>

@@ -13,3 +13,5 @@
 		echo $this->Form->end('This is me'), '<br />';
 	}
 ?>
+
+<h3><a href="./add">Not you?</a></h3>
