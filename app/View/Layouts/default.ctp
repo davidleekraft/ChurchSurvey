@@ -25,7 +25,7 @@
 <link rel="stylesheet" href="http://oslc2.cc/wp-content/themes/infocus/styles/brown.css" type="text/css" media="screen" />
 
 <!-- Added Survey CSS & Java file -->
-<link rel="stylesheet" href="survey.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="css/survey.css" type="text/css" media="screen" />
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" media="screen" />
 <link rel="stylesheet" href="/resources/demos/style.css" media="screen" />
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
