@@ -9,6 +9,12 @@ class MembersController extends AppController {
 	public $helpers = array('Html', 'Form');
 	
 	public function index() {
+	
+		if("CHURCH MEMBER" != $this->Session->read('User.UserType'))
+		{
+			$this->redirect(array('controller' => 'users', 'action' => 'login'));
+		}
+	
 		if(!$this->Session->check('Member.MemberID'))
 		{
 			$this->redirect(array('controller' => 'members', 'action' => 'select'));
@@ -20,15 +26,27 @@ class MembersController extends AppController {
 	}
 
 	public function add() {
-
+		if("CHURCH MEMBER" != $this->Session->read('User.UserType'))
+		{
+			$this->redirect(array('controller' => 'users', 'action' => 'login'));
+		}
 	}
 	
 	public function thanks() {
+		if("CHURCH MEMBER" != $this->Session->read('User.UserType'))
+		{
+			$this->redirect(array('controller' => 'users', 'action' => 'login'));
+		}
 	}
 	
 	//Confirm identity page
 	public function confirmIdentity($firstName, $lastName)
 	{
+		if("CHURCH MEMBER" != $this->Session->read('User.UserType'))
+		{
+			$this->redirect(array('controller' => 'users', 'action' => 'login'));
+		}
+		
 		$this->loadModel('Member');
 		$conditions = array('recursive' => 1);
 		$member = $this->Member->find('all', array('recursive' => 1, 'conditions' => array('Member.LName' => $lastName, 'Member.FName' => $firstName)));
@@ -56,6 +74,11 @@ class MembersController extends AppController {
 	
 	public function display() {
 	
+		if("CHURCH MEMBER" != $this->Session->read('User.UserType'))
+		{
+			$this->redirect(array('controller' => 'users', 'action' => 'login'));
+		}
+	
 		$mID = $this->Session->read('Member.MemberID');
 		$this->loadmodel('Member');
 		$this->set('member', $this->Member->find('first', array('conditions' =>
@@ -65,6 +88,11 @@ class MembersController extends AppController {
 	}
 
 	public function survey() {
+	
+		if("CHURCH MEMBER" != $this->Session->read('User.UserType'))
+		{
+			$this->redirect(array('controller' => 'users', 'action' => 'login'));
+		}
 		
 		$this->set('memberID', $this->Session->read('Member.MemberID'));
 		$this->loadmodel('SurveyAnswer');
@@ -120,6 +148,12 @@ class MembersController extends AppController {
 	 * Controller for member select form.
 	 */
 	public function select() {
+	
+		if("CHURCH MEMBER" != $this->Session->read('User.UserType'))
+		{
+			$this->redirect(array('controller' => 'users', 'action' => 'login'));
+		}
+
 		if($this->request->is('post')) 
 		{
 			$firstName = $this->request->data('Member.FName');

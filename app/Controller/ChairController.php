@@ -22,8 +22,12 @@ class AdminController extends AppController	{
 	//Index page exists, but no logic is yet necessary
 	public function index()
 	{
-	
+	    if("COMMITTEE CHAIR" != $this->Session->read('User.UserType'))
+		{
+			$this->redirect(array('controller' => 'users', 'action' => 'login'));
+		}
 	}
+	
 	
 	//Report section page, main console for generating reports
 	public function reports()
