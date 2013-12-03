@@ -117,6 +117,11 @@ class MembersController extends AppController {
 								VALUES ('$answers', '$mID')");
 						}
 					}
+					
+					$dateTime = date("Y-m-d H:i:s");
+					$updateTime = $this->Member->query("UPDATE Members
+						SET SurveyUpdated='$dateTime'
+						WHERE MemberID = $mID");
 				}
 			
 			$this->redirect(array('action' => 'thanks'));

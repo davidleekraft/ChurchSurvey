@@ -44,7 +44,7 @@ class UsersController extends AppController {
 				}
 				elseif(strcmp('COMMITTEE CHAIR', $userType) == 0)
 				{
-					$this->redirect(array('controller' => 'admin', 'action' => 'index'));
+					$this->redirect(array('controller' => 'chair', 'action' => 'index'));
 				}
 				else
 				{
