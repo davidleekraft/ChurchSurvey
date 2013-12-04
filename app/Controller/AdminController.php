@@ -267,49 +267,44 @@ class AdminController extends AppController	{
 			$this->redirect(array('controller' => 'users', 'action' => 'login'));
 		}
 			$this->loadModel('User');
-			$conditions = array('recursive' => 1);
-			$this->set('users', $this->User->find('all', $conditions));
-			
-			if ($this->request->is('post') && isset($this->request->data['User']))
+			if ($this->request->is('post'))
 			{
-				$userData = array();
-				$users = $this->request->data['User'];
+				$userType = $this->data['userType'];
+				$userPass = $this->data['currentPassword'];
+				$newPass = $this->data['newPassword'];
+				$verifyPass = $this->data['verifyPassword'];
 				$errors = array();
-				
-				foreach($users as $user)
+				if($newPass != $verifyPass)
 				{
-					$userID = $users['userType'];
-					$userPass = $user['newPassword'];
-					if(!$userPass.equals($user['verifyPassword']))
-					{
-						$errors[] = "Passwords do not match";
-					}
-					if ($userPass < 5)
-					{
-						$errors[] = "Password must be at least 5 characters long";
-					}
-				//if ($userPass)
+					$errors[] = "Passwords do not match";
+				}
+				if (strlen($newPass) < 8)
+				{
+					$errors[] = "Password must be at least 8 characters long";
+				}
 				
-				//if(!empty($status['StatusID']))
-					//{
-					//foreach($status['StatusID'] as $statusID)
-						//{
-						array_push($userData, array('userID' => $userID));
-						//}		
-					//}
-			
+				$user = $this->User->find('all', array('recursive' => 1, 'conditions' => array('User.UserType' => $userType, 'User.Password' => $userPass)));
+				if(count($user) != 1)
+				{
+					$errors[] = "Incorrect Password";
 				}
 				if (count($errors)==0)
 				{
-					$deleteUser = $this->User->deleteAll(array('1 = 1'), false);
-					$saveUser = 	$this->User->saveAll($userData);
+                    $updateQuery = $this->User->query("UPDATE Users
+						SET Password='$newPass'
+						WHERE UserType='$userType'");
+					$this->Session->setFlash('Password has been changed');
 				}
-				
-				if($deleteUser && $saveUser)
+				else
 				{
-					$this->Session->setFlash('Sections have been updated');
+					foreach($errors as $error)
+					{
+						$this->Session->setFlash($error);
+					}
 				}
 			}
+			$conditions = array('recursive' => 1);
+			$this->set('users', $this->User->find('all', $conditions));
 		}
 		
 	//Manage users page, change status of users
