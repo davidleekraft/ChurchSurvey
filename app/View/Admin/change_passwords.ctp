@@ -14,7 +14,7 @@
 $this->extend('/Admin/view');
 
 //Initialize form to change password
-echo $this->Form->create('User', array('url' => array('controller' => 'admin', 'action' => 'changePasswords')));
+echo $this->Form->create('ChangePassword', array('url' => array('controller' => 'admin', 'action' => 'changePasswords')));
 ?>
 
 <table>
@@ -43,8 +43,7 @@ echo $this->Form->create('User', array('url' => array('controller' => 'admin', '
 		<td><input type="password" size="20" name="verifyPassword" /></td>
 	</tr>
 </table>
-<h2><?php foreach($users as $userKey => $user)
-			{echo $user['User']['Password'];} ?></h2>
+
 <?php echo $this->Form->end('Change Password'); ?>
 
 </div>
