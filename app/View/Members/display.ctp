@@ -8,4 +8,5 @@ Email: <?php echo $member['Member']['Email']; ?> </h4>
 
 <br /><br />
 
+<h4> Not You? <?php echo $this->Html->link("Click Here To LOG OUT", array('controller'=>'users', 'action'=>'logout'));?>
 <h3><a href="./survey">Take Survey!</a></h3>
