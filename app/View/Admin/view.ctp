@@ -7,7 +7,7 @@
 	<?php echo $this->Html->link('Edit Sections', 'sections')?>
 </li>
 <li class="page_item page-item-#">
-	<?php echo $this->Html->link('Reports', array('controller' => 'report', 'action'=> 'skillsReport'))?>
+	<?php echo $this->Html->link('Reports', array('controller' => 'report', 'action'=> 'index'))?>
 </li>
 <li class="page_item page-item-#">
 	<?php echo $this->Html->link('Printable Survey', 'printable')?>

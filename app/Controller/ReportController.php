@@ -13,11 +13,21 @@ class ReportController extends AppController
 	//Index page exists, but no logic is yet necessary
 	public function index()
 	{
-		$this->redirect(array('action' => 'skillsReport'));
+		$users_allowed = array("ADMIN", "COMMITTEE CHAIR");
+		if(!in_array($this->Session->read('User.UserType'), $users_allowed))
+		{
+			$this->redirect(array('controller' => 'users', 'action' => 'login'));
+		}
+		
 	}
 	//This function loads information of all users for use in view to report by user name
 	public function findMember()
 	{
+		$users_allowed = array("ADMIN", "COMMITTEE CHAIR");
+		if(!in_array($this->Session->read('User.UserType'), $users_allowed))
+		{
+			$this->redirect(array('controller' => 'users', 'action' => 'login'));
+		}
 		$this ->loadModel('Member');
 		
 		$this->set('title_for_layout', 'Find Member');
@@ -27,6 +37,11 @@ class ReportController extends AppController
 	//This function loads information of all users for use in view to report by user name
 	public function skillsReport()
 	{
+		$users_allowed = array("ADMIN", "COMMITTEE CHAIR");
+		if(!in_array($this->Session->read('User.UserType'), $users_allowed))
+		{
+			$this->redirect(array('controller' => 'users', 'action' => 'login'));
+		}
 		$this ->loadModel('Choice');
 		$this ->loadModel('Status');
 		
@@ -39,22 +54,32 @@ class ReportController extends AppController
 	}
 
 	//Function loads the page with report by skills	
-	public function report_by_skills($gifts = NULL)
+	public function report_by_skills()
 	{
+			$users_allowed = array("ADMIN", "COMMITTEE CHAIR");
+			if(!in_array($this->Session->read('User.UserType'), $users_allowed))
+			{
+				$this->redirect(array('controller' => 'users', 'action' => 'login'));
+			}
+			
 			$this->loadModel('Member');
 			$this->loadModel('Choice');
 			$this->loadModel('SurveyAnswer');
 			
 			$this->set('title_for_layout', 'Report By Skills');
+			
 			//get chosen skills
 			$gifts = $this->params['url']['gifts'];
 			$compSkills = $this->params['url']['compSkills'];
 			$others = $this->params['url']['Others'];
+			
 			//get constituents
 			$constituents =  $this->params['url']['Constituents'];
+			
 			//get date, when report was changed
 			$updated =  $this->params['url']['updated'];
 			$show_date = $updated; //store user friendly format of date in $show_date
+			
 			//formate $updated to match the format of database
 			if($updated)
 			{
@@ -65,7 +90,7 @@ class ReportController extends AppController
 			//Check if user selected any skills in three lists
 			if($gifts || $compSkills || $others)
 			{
-				//if no skills were chosen, redirect to previous page and show error message
+				//if no skills were chosen,  to previous page and show error message
 				if(!($constituents))
 				{
 					$this->Session->setFlash('You should chose constituent(s) to get a report');
@@ -116,13 +141,14 @@ class ReportController extends AppController
 					$this->Session->setFlash('Nobody was found with chosen skill(s): ' . $sklills_text);
 					$this->redirect(array('action' => 'skillsReport'));
 				}
+				
 				$this->set('members', $members);
 				$this->set('chosen_skills', $result); 				//set all id's of chosen skills in order to highlite them in report
 				$this->set('choices', $this->SurveyAnswer->find('all', array('conditions' => array('SurveyAnswer.MemberID' => $membersWithSkills))));
 				$this->set('skills', $sklills_text);                //send the formatted list of skills  to the view
 				
-				//veriables which will be used in the view to be passed as "GET" arguments
-				//we need to serialize it here in order to save data of arrays
+				//variables which will be used in the view to be passed as "GET" arguments
+				//we need to serialize it here in order to save data of arrays to pass them in generate pdf
 				$gift = serialize($gifts);
 				$comp = serialize($compSkills);
 				$other = serialize($others);
@@ -163,6 +189,11 @@ class ReportController extends AppController
 	//Function loads the page with report by skills	
 	public function view_skills_pdf()
 	{
+			$users_allowed = array("ADMIN", "COMMITTEE CHAIR");
+			if(!in_array($this->Session->read('User.UserType'), $users_allowed))
+			{
+				$this->redirect(array('controller' => 'users', 'action' => 'login'));
+			}
 			$this->loadModel('Member');
 			$this->loadModel('Choice');
 			$this->loadModel('SurveyAnswer');
@@ -268,38 +299,20 @@ class ReportController extends AppController
 			}
 			
 			//This part is required to create pdf for the individual report
-        Configure::write('debug',0); // Otherwise we cannot use this method while developing
+			Configure::write('debug',0); // Otherwise we cannot use this method while developing
 
-        $this->layout = 'pdf'; //this will use the pdf.ctp layout
-        $this->render();
+			$this->layout = 'pdf'; //this will use the pdf.ctp layout
+			$this->render();
 	}
-   function viewPdf()
-    {
-			$id = $this->params['url']['selected_person'];
-			$this->set('title_for_layout', 'Individual Report');
-			$this->loadModel('Member');
-			$this->loadModel('Section');
-			$this->loadModel('SurveyAnswer');
-			
-			list($id) = split ('--',$id);
-			
-			$this->set('members', $this->Member->find('all', array('conditions' => array('Member.MemberID' => $id))));
-			$choices = $this->SurveyAnswer->find('all', array('conditions' => array('SurveyAnswer.MemberID' => $id)));
-			$sections = $this->Section->find('all');
-			$this->set('choices', $choices); 
-			$this->set('sections', $sections);
-
-//This part is required to create pdf for the individual report
-        Configure::write('debug',0); // Otherwise we cannot use this method while developing
-
-        $this->layout = 'pdf'; //this will use the pdf.ctp layout
-        $this->render();
-    } 
-	
 	
 	//need validation!	
 	public function individual_report()
 	{
+			$users_allowed = array("ADMIN", "COMMITTEE CHAIR");
+			if(!in_array($this->Session->read('User.UserType'), $users_allowed))
+			{
+				$this->redirect(array('controller' => 'users', 'action' => 'login'));
+			}
 			$id = $this->params['url']['selected_person'];
 			$this->set('title_for_layout', 'Individual Report');
 			$this->loadModel('Member');
@@ -314,5 +327,34 @@ class ReportController extends AppController
 			$this->set('choices', $choices); 
 			$this->set('sections', $sections); 
 	}
+	
+	//function that generates individual report
+   function viewPdf()
+    {
+			$users_allowed = array("ADMIN", "COMMITTEE CHAIR");
+			if(!in_array($this->Session->read('User.UserType'), $users_allowed))
+			{
+				$this->redirect(array('controller' => 'users', 'action' => 'login'));
+			}
+			$id = $this->params['url']['selected_person'];
+			$this->set('title_for_layout', 'Individual Report');
+			$this->loadModel('Member');
+			$this->loadModel('Section');
+			$this->loadModel('SurveyAnswer');
+			
+			list($id) = split ('--',$id);
+			
+			$this->set('members', $this->Member->find('all', array('conditions' => array('Member.MemberID' => $id))));
+			$choices = $this->SurveyAnswer->find('all', array('conditions' => array('SurveyAnswer.MemberID' => $id)));
+			$sections = $this->Section->find('all');
+			$this->set('choices', $choices); 
+			$this->set('sections', $sections);
+
+			//This part is required to create pdf for the individual report
+			Configure::write('debug',0); // Otherwise we cannot use this method while developing
+
+			$this->layout = 'pdf'; //this will use the pdf.ctp layout
+			$this->render();
+    } 
 }
 ?>
