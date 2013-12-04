@@ -43,8 +43,7 @@ echo $this->Form->create('ChangePassword', array('url' => array('controller' => 
 		<td><input type="password" size="20" name="verifyPassword" /></td>
 	</tr>
 </table>
-<h2><?php foreach($users as $userKey => $user)
-			{echo $user['User']['Password'];} ?></h2>
+
 <?php echo $this->Form->end('Change Password'); ?>
 
 </div>

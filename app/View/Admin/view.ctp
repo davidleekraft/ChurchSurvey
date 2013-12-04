@@ -16,6 +16,9 @@
 	<?php echo $this->Html->link('Purge Responses', 'purgeAll')?>
 </li>
 <li class="page_item page-item-#">
+	<?php echo $this->Html->link('Change Passwords', 'changePasswords')?>
+</li>
+<li class="page_item page-item-#">
 	<?php echo $this->Html->link('Log out', array('controller' => 'users', 'action'=> 'logout'))?>
 </li>
 <?php echo $this->end('menu');		?>	

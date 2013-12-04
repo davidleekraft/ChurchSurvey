@@ -269,17 +269,16 @@ class AdminController extends AppController	{
 			$this->loadModel('User');
 			if ($this->request->is('post'))
 			{
-				$userType = $this->data['ChangePassword']['userType'];
-				$userPass = $this->data['ChangePassword']['currentPassword'];
-				$newPass = $this->data['ChangePassword']['newPassword'];
-				$verifyPass = $this->data['ChangePassword']['verifyPassword'];
+				$userType = $this->data['userType'];
+				$userPass = $this->data['currentPassword'];
+				$newPass = $this->data['newPassword'];
+				$verifyPass = $this->data['verifyPassword'];
 				$errors = array();
-				$this->Session->setFlash('is this working?');
 				if($newPass != $verifyPass)
 				{
 					$errors[] = "Passwords do not match";
 				}
-				if ($userPass < 8)
+				if (strlen($newPass) < 8)
 				{
 					$errors[] = "Password must be at least 8 characters long";
 				}
@@ -291,14 +290,10 @@ class AdminController extends AppController	{
 				}
 				if (count($errors)==0)
 				{
-                    if($this->User->save($this->request->data))
-					{
-						$this->Session->setFlash('It worked!!!');
-					}
-					else
-					{
-						$this->Session->setFlash('It didnt work');
-					}
+                    $updateQuery = $this->User->query("UPDATE Users
+						SET Password='$newPass'
+						WHERE UserType='$userType'");
+					$this->Session->setFlash('Password has been changed');
 				}
 				else
 				{
