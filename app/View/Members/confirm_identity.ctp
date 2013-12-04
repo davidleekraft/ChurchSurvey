@@ -14,4 +14,5 @@
 	}
 ?>
 
-<h3><a href="./add">Not you?</a></h3>
+<br />
+<h4> Don't see your name listed? <?php echo $this->Html->link("Click Here", array('controller'=>'members', 'action'=>'add'));?> to create a new member account. </h4>
