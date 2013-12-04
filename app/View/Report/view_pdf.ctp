@@ -8,8 +8,8 @@ $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8',
 // set document information
 $pdf->SetCreator(PDF_CREATOR);
 $pdf->SetAuthor('Ross Moroney');
-$pdf->SetTitle('TCPDF using CakePHP');
-$pdf->SetSubject('TCPDF using CakePHP');
+$pdf->SetTitle('Member Report');
+$pdf->SetSubject('Member Report');
 $pdf->SetKeywords('TCPDF, CakePHP, PDF, example, test, guide');
 
 // set default header data
@@ -38,9 +38,9 @@ $pdf->SetFont('times', '', 9);
 
 // add a page
 $pdf->AddPage();
-// -----------------------------------------------------------------------------
+// --------------------------------Table For a Report-------------------------------------
 $tbl .= <<<EOD
-<table cellspacing="0" cellpadding="1" border="1">
+<table cellspacing="0" cellpadding="15" border="1">
     <tr>
         <th style="text-align:center;font-size:large"><b>Contact info</b></th>
 		<th style="text-align:center;font-size:large"><b>God's Gifts</b></th>

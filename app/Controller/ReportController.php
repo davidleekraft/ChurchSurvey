@@ -159,25 +159,7 @@ class ReportController extends AppController
 				$this->set('other', $other);
 				$this->set('cons', $cons);
 				$this->set('uptd', $uptd);
-			}/*
-			elseif ($updated)
-			{
-				$members = $this->Member->find('all', array('conditions' => array('Member.SurveyUpdated >=' => $updated), 
-																 'order' => array('Member.SurveyUpdated' => 'asc')));
-				$ids = array();
-				foreach ($members as $member)
-				{
-					$ids[] = $member['Member']['MemberID'];
-					print_r($ids);
-				}
-				$this->set('members', $members);
-				
-				$this->Session->setFlash('You should chose skill(s), you would like to get report for; or pick a date');
-				$this->set('choices', $this->SurveyAnswer->find('all', array('conditions' => array('SurveyAnswer.MemberID' => $ids))));
-				$sklills_text =  "<h2>Surveys since: " . $show_date . "</h2>";
-				$this->set('skills', $sklills_text);                //send the formatted list of skills  to the view
-				
-			}*/
+			}
 			else
 			{
 				$this->Session->setFlash('You should chose skill(s), you would like to get report for');
@@ -305,7 +287,7 @@ class ReportController extends AppController
 			$this->render();
 	}
 	
-	//need validation!	
+	//Generates a report for chosen person
 	public function individual_report()
 	{
 			$users_allowed = array("ADMIN", "COMMITTEE CHAIR");
@@ -328,7 +310,7 @@ class ReportController extends AppController
 			$this->set('sections', $sections); 
 	}
 	
-	//function that generates individual report
+	//function that generates individual report in pdf Format
    function viewPdf()
     {
 			$users_allowed = array("ADMIN", "COMMITTEE CHAIR");

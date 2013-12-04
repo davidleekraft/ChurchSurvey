@@ -1,6 +1,6 @@
 <?php $this->extend('/Report/view'); ?>
 <h2>Please choose a report option:</h2>
 
-<a href = "findMember"><h3>Click Here to Generate a Report by Member</h3></a>
+<h3><?php echo $this->Html->link("Click Here to Generate a Report by Member", array('controller'=>'report', 'action'=>'findMember')); ?></h3>
 
-<a href = "skillsReport"><h3>Click Here to Generate a Report by Skills</h3></a>
+<h3><?php echo $this->Html->link("Click Here to Generate a Report by Skills", array('controller'=>'report', 'action'=>'skillsReport')); ?></h3>

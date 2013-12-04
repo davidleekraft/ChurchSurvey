@@ -1,3 +1,4 @@
+<?php $this->extend('/Report/view'); ?>
 <script>
 $(function() {
        $("#datepicker").datepicker();
