@@ -13,3 +13,5 @@
 		echo $this->Form->end('This is me'), '<br />';
 	}
 ?>
+<br />
+<h4> Don't see your name listed? <?php echo $this->Html->link("Click Here", array('controller'=>'members', 'action'=>'add'));?> to create a new member account. </h4>
